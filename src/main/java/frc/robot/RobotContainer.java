@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.MecanumControllerCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.event.EventLoop;
@@ -129,7 +130,7 @@ public class RobotContainer {
 
 
 
-    
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
@@ -146,7 +147,7 @@ public Command getAutonomousCommand(){
     .andThen(new InstantCommand(()-> m_climb.teleopClimbStop(),m_climb))
     .andThen(new RunCommand(()->m_intake.IntakeOpen(),m_climb)).withTimeout(0.8)
     .andThen(new RunCommand(()->m_roller.IntakeUnroll(),m_roller)).withTimeout(1.5)
-    .andThen(new RunCommand(()->m_climb.climbMove(0),m_climb)).withTimeout(1)
+    .andThen(new RunCommand(()->m_climb.climbMove(0),m_climb)).withTimeout(1).andThen(new WaitCommand(1))
     .andThen(new RunCommand(()->m_drive.drive(-0.4,0,0,false),m_drive)).withTimeout(2.5)
     .andThen(() -> m_drive.drive(0, 0, 0, false)));
     
