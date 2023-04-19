@@ -143,7 +143,7 @@ public Command getAutonomousCommand(){
     // Run path following command, then stop at the end. 
     return new SequentialCommandGroup(
         new SequentialCommandGroup(
-        new RunCommand(()->m_climb.climbMove(2),m_climb)).withTimeout(1)
+        new RunCommand(()->m_climb.climbMove(2),m_climb)).withTimeout(1.8)
     .andThen(new InstantCommand(()-> m_climb.teleopClimbStop(),m_climb))
     .andThen(new RunCommand(()->m_intake.IntakeOpen(),m_climb)).withTimeout(0.8)
     .andThen(new RunCommand(()->m_roller.IntakeUnroll(),m_roller)).withTimeout(1.5)
