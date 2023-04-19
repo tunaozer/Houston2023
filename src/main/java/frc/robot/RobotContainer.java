@@ -38,6 +38,7 @@ import edu.wpi.first.wpilibj.event.EventLoop;
 
 
 
+
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -145,7 +146,7 @@ public Command getAutonomousCommand(){
         new SequentialCommandGroup(
         new RunCommand(()->m_climb.climbMove(2),m_climb)).withTimeout(1.8)
     .andThen(new InstantCommand(()-> m_climb.teleopClimbStop(),m_climb))
-    .andThen(new RunCommand(()->m_intake.IntakeOpen(),m_climb)).withTimeout(0.8)
+    .andThen(new RunCommand(()->m_intake.IntakeOpen(),m_climb)).withTimeout(1)
     .andThen(new RunCommand(()->m_roller.IntakeUnroll(),m_roller)).withTimeout(1.5)
     .andThen(new RunCommand(()->m_climb.climbMove(0),m_climb)).withTimeout(1).andThen(new WaitCommand(1))
     .andThen(new RunCommand(()->m_drive.drive(-0.4,0,0,false),m_drive)).withTimeout(2.5)
